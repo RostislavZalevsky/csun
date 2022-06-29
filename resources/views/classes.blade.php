@@ -7,11 +7,11 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="subject">Subject</label>
-                <input type="text" class="form-control" id="subject" placeholder="Comp">
+                <input type="text" class="form-control" id="subject" placeholder="e.g. Comp">
             </div>
             <div class="form-group col-md-3">
                 <label for="catalogNumber">Catalog number</label>
-                <input type="number" min="1" step="1" class="form-control" id="catalogNumber" placeholder="110">
+                <input type="number" min="1" step="1" class="form-control" id="catalogNumber" placeholder="e.g. 110">
             </div>
             <div class="form-group col-md-3">
                 <label for="semester">Semester</label>

@@ -15,3 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',  [\App\Http\Controllers\ClassesController::class, 'index'])->name('home');
 Route::get('/classes', [\App\Http\Controllers\ClassesController::class, 'classes'])->name('classes');
+
+Route::get('/version', function () {
+    return view('welcome');
+});
