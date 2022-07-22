@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClassesController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +15,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',  [\App\Http\Controllers\ClassesController::class, 'index'])->name('home');
-Route::get('/classes', [\App\Http\Controllers\ClassesController::class, 'classes'])->name('classes');
+Route::get('/',  [ClassesController::class, 'index'])->name('home');
+Route::get('/classes', [ClassesController::class, 'classes'])->name('classes');
 
-Route::get('/version', function () {
-    return view('welcome');
+Route::prefix('dev')->group(function () { // test
+
+    // Production
+
+
+
+    // Stage
+
+    // if (config('app.env') === 'production') return;
+
+    Route::get('clear-cache', function() {
+        Artisan::call('cache:clear');
+
+        return "Cache is cleared";
+    });
+
+    Route::get('optimize', function () {
+        Artisan::call('optimize');
+
+        return "Optimized";
+    });
+
+    Route::get('/version', function () {
+        return view('welcome');
+    });
 });
+

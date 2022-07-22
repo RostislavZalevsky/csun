@@ -93,9 +93,9 @@ class Term
         return match (true) {
             $today >= $spring && $today < $summer => Semester::Spring,
             $today >= $summer && $today < $fall => Semester::Summer,
-            $today >= $fall && $today < $winter => Semester::Fall,
+            //$today >= $fall && $today < $winter => Semester::Fall,
 
-            default => Semester::Winter,
+            default => Semester::Fall,
         };
     }
 }
@@ -104,7 +104,7 @@ class Term
 enum Semester: string // Half year, maybe not quarters?
 {
     case Fall = 'Fall';
-    case Winter = 'Winter'; // ?
+    //case Winter = 'Winter'; // ?
     case Spring = 'Spring';
     case Summer = 'Summer';
 

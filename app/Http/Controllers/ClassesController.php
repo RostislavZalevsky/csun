@@ -29,7 +29,7 @@ class ClassesController extends Controller
 
         return view('home', [
             'classes' => $classes,
-            'executionTime' => $executionTime,
+            'executionTime' => round($executionTime, 2),
         ]);
     }
 
@@ -48,7 +48,8 @@ class ClassesController extends Controller
         // TODO: Measuring script execution time
         $startTime = microtime(true);
 
-        $classes = $this->csun->getClasses($term, $classesParam); // TODO: It takes too long to unload classes, so I use a cache with 1 hour storage
+        $classes = $this->csun->getClasses($term, $classesParam);
+        // TODO: It takes too long to unload classes, so I use a cache with 1 hour storage
 
         $endTime = microtime(true);
         $executionTime = ($endTime - $startTime);
@@ -76,7 +77,8 @@ class ClassesController extends Controller
         $request->validate([
             // Term
             'semester'          => ['nullable', new Enum(Semester::class)],
-            'year'              => ['nullable', 'required_with:semester', 'digits:4', 'integer', 'min:' . Term::getMinYear(), 'max:' . Term::getMaxYear()],
+            'year'              => ['nullable', 'required_with:semester', 'digits:4', 'integer',
+                'min:' . Term::getMinYear(), 'max:' . Term::getMaxYear()],
 
             // Class
             'subject'           => ['nullable', 'required_with:catalog_number', 'string'],

@@ -24,16 +24,18 @@ class CSUN
         if (!$term) $term = new Term(Term::getDefaultSemester(), Term::getDefaultYear());
         if (!$class) $class = new Classes('Comp', 110);
 
-        return Cache::remember(self::CSUNUrlApi . $term->getApiQuery() . $class->getApiQuery(), 60 * 60, function () use ($term, $class) { // 1 hour
+        return Cache::remember(self::CSUNUrlApi . $term->getApiQuery() . $class->getApiQuery(), 60 * 60,
+            function () use ($term, $class) { // 1 hour
 
-            $response = $this->client->request('GET', self::CSUNUrlApi . $term->getApiQuery() . $class->getApiQuery());
-            if ($response->getStatusCode() != 200) return []; // TODO: need to return with the reason message
+                $response = $this->client->request('GET', self::CSUNUrlApi . $term->getApiQuery() . $class->getApiQuery());
+                if ($response->getStatusCode() != 200) return []; // TODO: need to return with the reason message
 
-            $body = json_decode($response->getBody(), true);
-            if (!$body || $body['success'] != true || $body['collection'] != 'classes') return [];
+                $body = json_decode($response->getBody(), true);
+                if (!$body || $body['success'] != true || $body['collection'] != 'classes') return [];
 
-            return $body['classes'];
-        });
+                return $body['classes'];
+            }
+        );
     }
 }
 
